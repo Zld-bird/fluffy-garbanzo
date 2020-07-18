@@ -4,8 +4,6 @@ import com.zld.demo.pojo.BookManagement;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-
 public interface BookManagementMapper {
     int deleteByPrimaryKey(Integer id);
 

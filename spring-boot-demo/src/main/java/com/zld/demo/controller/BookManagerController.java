@@ -32,8 +32,8 @@ public class BookManagerController {
 
     @RequestMapping("selectBook")
     public String selectBook(Model model){
-        List<BookManagement> list=bookManagerService.selectBook();
-        model.addAttribute("list", list);
+        /*List<BookManagement> list=bookManagerService.selectBook();
+        model.addAttribute("list", list);*/
         return "index";
     }
 }

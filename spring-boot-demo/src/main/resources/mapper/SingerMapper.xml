@@ -2,7 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zld.demo.mapper.SingerMapper">
   <resultMap id="BaseResultMap" type="com.zld.demo.pojo.Singer">
-    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="uid" jdbcType="VARCHAR" property="uid" />
     <result column="sname" jdbcType="VARCHAR" property="sname" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -34,65 +35,34 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
+  <insert id="insertSinger">
+    insert into singer
+    <include refid="Example_Where_Clause" />
+  </insert>
+
   <sql id="Base_Column_List">
-    uid, sname
+    id, uid, sname
   </sql>
-  <select id="selectByExample" parameterType="com\pojo.SingerExample" resultMap="BaseResultMap">
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select
-    <if test="distinct">
-      distinct
-    </if>
     <include refid="Base_Column_List" />
     from singer
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
+    where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByExample" parameterType="com\pojo.SingerExample">
-    delete from singer
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com\pojo.Singer">
-    insert into singer (uid, sname)
-    values (#{uid,jdbcType=INTEGER}, #{sname,jdbcType=VARCHAR})
+  <insert id="insert" parameterType="com.zld.demo.pojo.Singer">
+    insert into singer (id, uid, sname
+      )
+    values (#{id,jdbcType=BIGINT}, #{uid,jdbcType=VARCHAR}, #{sname,jdbcType=VARCHAR}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com\pojo.Singer">
+
+  <insert id="insertSelective" parameterType="com.zld.demo.pojo.Singer">
     insert into singer
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
       <if test="uid != null">
         uid,
       </if>
@@ -101,38 +71,31 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
       <if test="uid != null">
-        #{uid,jdbcType=INTEGER},
+        #{uid,jdbcType=VARCHAR},
       </if>
       <if test="sname != null">
         #{sname,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com\pojo.SingerExample" resultType="java.lang.Long">
-    select count(*) from singer
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
+
   <update id="updateByExampleSelective" parameterType="map">
     update singer
     <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
       <if test="record.uid != null">
-        uid = #{record.uid,jdbcType=INTEGER},
+        uid = #{record.uid,jdbcType=VARCHAR},
       </if>
       <if test="record.sname != null">
         sname = #{record.sname,jdbcType=VARCHAR},
       </if>
     </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update singer
-    set uid = #{record.uid,jdbcType=INTEGER},
-      sname = #{record.sname,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
