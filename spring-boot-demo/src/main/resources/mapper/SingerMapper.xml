@@ -35,7 +35,7 @@
       </foreach>
     </where>
   </sql>
-  <insert id="insertSinger">
+  <insert id="insertSinger1">
     insert into singer
     <include refid="Example_Where_Clause" />
   </insert>
@@ -51,13 +51,15 @@
     where id = #{id,jdbcType=BIGINT}
   </select>
   <insert id="insert" parameterType="com.zld.demo.pojo.Singer">
-    insert into singer (id, uid, sname
-      )
-    values (#{id,jdbcType=BIGINT}, #{uid,jdbcType=VARCHAR}, #{sname,jdbcType=VARCHAR}
-      )
+    insert into singer 
+    (id, uid, sname)
+    values
+    <foreach collection="list" item="item" index="index" separator="," >
+    (#{id,jdbcType=BIGINT}, #{uid,jdbcType=VARCHAR}, #{sname,jdbcType=VARCHAR})
+    </foreach>
   </insert>
 
-  <insert id="insertSelective" parameterType="com.zld.demo.pojo.Singer">
+  <insert id="insertSinger" parameterType="java.util.List">
     insert into singer
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -71,15 +73,17 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=BIGINT},
-      </if>
-      <if test="uid != null">
-        #{uid,jdbcType=VARCHAR},
-      </if>
-      <if test="sname != null">
-        #{sname,jdbcType=VARCHAR},
-      </if>
+      <foreach collection="list" item="item" index="index" separator="," >
+        <if test="item.id != null">
+          #{item.id,jdbcType=BIGINT},
+        </if>
+        <if test="item.uid != null">
+          #{item.uid,jdbcType=VARCHAR},
+        </if>
+        <if test="item.sname != null">
+          #{item.sname,jdbcType=VARCHAR},
+        </if>
+      </foreach>
     </trim>
   </insert>
 
