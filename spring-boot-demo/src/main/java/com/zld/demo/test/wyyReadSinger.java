@@ -28,15 +28,19 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @SpringBootTest(webEnvironment =SpringBootTest.WebEnvironment.MOCK,classes = wyyReadSinger.class)
 @AutoConfigureMockMvc
 public class wyyReadSinger {
-    @Autowired
-    private MockMvc mockMvc;
+    /*@Autowired
+    private MockMvc mockMvc;*/
     @MockBean
     private SingerService singerService;
 
     @Test
     public void test(){
-        List singer = singer("D://面试//ss1.json");
-        try {
+        List<String> singer = singer("D://面试//ss1.json");
+        Singer s=new Singer();
+        for (String s1:singer) {
+            System.out.println(s1);
+        }
+        /*try {
             MvcResult mvcResult = mockMvc.perform(
                     post("/singer/insertSinger")
                             .contentType(MediaType.APPLICATION_JSON)
@@ -44,11 +48,15 @@ public class wyyReadSinger {
                     .andReturn();
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
-
-    public List singer(String path) {
+    /**
+     * 读取文件
+     * @param path
+     * @return
+     */
+    public static List singer(String path) {
         String s = readJsonFile(path);
         System.out.println(s);
         String[] split = s.split("\n|\r");
