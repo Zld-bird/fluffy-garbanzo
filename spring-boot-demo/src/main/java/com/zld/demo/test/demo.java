@@ -7,15 +7,15 @@ public class demo {
         int sort = new demo().sort(a);
         System.out.println(sort);*/
 
-        String s[]={"121","113"};
+        String s[] = {"121", "113"};
 
         /*String a="12";
         String b="13";*/
-        for (int i=0;i<s.length-1;i++) {
-            if (s[i].compareTo(s[i+1]) > 0) {
-                System.out.println(s[i]+ "大于" + s[i+1]);
+        for (int i = 0; i < s.length - 1; i++) {
+            if (s[i].compareTo(s[i + 1]) > 0) {
+                System.out.println(s[i] + "大于" + s[i + 1]);
             } else {
-                System.out.println(s[i] + "小于" + s[i+1]);
+                System.out.println(s[i] + "小于" + s[i + 1]);
             }
         }
 
@@ -23,24 +23,24 @@ public class demo {
         new demo().sort1(str);*/
     }
 
-    public int sort(Integer number){
+    public int sort(Integer number) {
         int i = number.intValue();
         return i;
     }
 
-    public void sort1(String string){
-        String temp=null;
+    public void sort1(String string) {
+        String temp = null;
         String[] split = string.split(",");
-        for (int i=0;i<split.length;i++){
-            for(int j=0;j<split.length-i-1;j++){
-                if(split[j].compareTo(split[j+1])>0){
-                    temp=split[j+1];
-                    split[j+1]=split[j];
-                    split[j]=temp;
+        for (int i = 0; i < split.length; i++) {
+            for (int j = 0; j < split.length - i - 1; j++) {
+                if (split[j].compareTo(split[j + 1]) > 0) {
+                    temp = split[j + 1];
+                    split[j + 1] = split[j];
+                    split[j] = temp;
                 }
             }
         }
-        for(int a=0;a<split.length;a++) {
+        for (int a = 0; a < split.length; a++) {
             System.out.println(split[a]);
         }
     }

@@ -27,7 +27,8 @@ public class wyySinger {
             }
         }
     }
-    public static void getData(String url){
+
+    public static void getData(String url) {
         System.out.println(url);
 
         Document doc = null;

@@ -17,7 +17,7 @@ public class BookManagerServiceImpl implements BookManagerService {
     public int addBook(BookManagement bookManagement) {
         //String id = UUID.randomUUID().toString();
         //bookManagement.setId(id);
-        int i=bookManagementMapper.insertBook(bookManagement);
+        int i = bookManagementMapper.insertBook(bookManagement);
         return i;
     }
 

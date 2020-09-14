@@ -36,7 +36,7 @@ public class wyyReadSinger {
             File jsonFile = new File(fileName);
             FileReader fileReader = new FileReader(jsonFile);
 
-            Reader reader = new InputStreamReader(new FileInputStream(jsonFile),"utf-8");
+            Reader reader = new InputStreamReader(new FileInputStream(jsonFile), "utf-8");
             int ch = 0;
             StringBuffer sb = new StringBuffer();
             while ((ch = reader.read()) != -1) {

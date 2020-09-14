@@ -12,7 +12,7 @@ public class SingerController {
     @Autowired
     private SingerService singerService;
 
-    public void InsertSinger(){
+    public void InsertSinger() {
 
     }
 }

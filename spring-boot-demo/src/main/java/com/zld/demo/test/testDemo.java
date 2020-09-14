@@ -21,7 +21,7 @@ import java.util.Date;
 public class testDemo {
     public static void main(String[] args) throws IOException {
         BookManagement bookManagement = new BookManagement();
-        String url="http://127.0.0.1:8090/BookManager?bookManagement";
+        String url = "http://127.0.0.1:8090/BookManager?bookManagement";
         HttpClient httpClient = new DefaultHttpClient();
         HttpPost httpPost = new HttpPost(url);
 
@@ -34,7 +34,7 @@ public class testDemo {
         bookManagement.setLendDate(null);
         bookManagement.setLendMan(null);
         /*SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        */
+         */
         Date date = new Date(1890 - 02 - 23);
         //String format = simpleDateFormat.format(date);
         bookManagement
@@ -43,7 +43,7 @@ public class testDemo {
 
         JSONArray jsonArray = JSONArray.fromObject(bookManagement);
         System.out.println(jsonArray.toString());
-        StringEntity entity = new StringEntity(jsonArray.toString(),"utf-8");
+        StringEntity entity = new StringEntity(jsonArray.toString(), "utf-8");
         entity.setContentEncoding("UTF-8");
         entity.setContentType("application/json");
         httpPost.setEntity(entity);
